@@ -1,0 +1,29 @@
+name: packer-main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  packer:
+    env:
+      PACKER_LOG: 1
+      PACKER_LOG_PATH: /tmp/out.txt
+    runs-on: ubuntu-latest
+    name: Run Packer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup `packer`
+        uses: hashicorp/setup-packer@main
+        id: setup
+        env:
+          PACKER_LOG: "0"
+          PRODUCT_VERSION: latest
+
+      - name: Run `packer version`
+        id: version
+        run: |
+          packer version
