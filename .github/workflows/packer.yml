@@ -22,3 +22,8 @@ jobs:
         env:
           PACKER_LOG: "0"
           PRODUCT_VERSION: latest
+
+      - name: Run `packer version`
+        id: version
+        run: |
+          packer version
